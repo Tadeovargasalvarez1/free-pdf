@@ -1,0 +1,297 @@
+.form-fill-dialog {
+  width: min(650px, 100%);
+  max-height: min(780px, 94svh);
+}
+
+.form-fill-dialog__header {
+  align-items: flex-start;
+}
+
+.form-fill-dialog__header .modal__subheading {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-fill-dialog__body {
+  display: grid;
+  gap: 14px;
+}
+
+.form-fill-dialog__loading,
+.form-fill-dialog__privacy,
+.form-fill-dialog__warning,
+.form-fill-dialog__irreversible,
+.form-fill-dialog__hint,
+.form-fill-dialog__empty {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.form-fill-dialog__loading {
+  display: flex;
+  min-height: 96px;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  color: var(--color-text-muted);
+}
+
+.form-fill-dialog__privacy,
+.form-fill-dialog__warning,
+.form-fill-dialog__irreversible {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 11px;
+  border: 1px solid var(--color-border);
+  border-radius: 9px;
+}
+
+.form-fill-dialog__privacy {
+  border-color: color-mix(in srgb, var(--color-primary) 20%, var(--color-border));
+  background: var(--color-primary-soft);
+  color: var(--color-text-muted);
+}
+
+.form-fill-dialog__privacy svg {
+  flex: 0 0 auto;
+  margin-top: 1px;
+  color: var(--color-primary);
+}
+
+.form-fill-dialog__warning,
+.form-fill-dialog__irreversible {
+  border-color: color-mix(in srgb, #d97706 40%, var(--color-border));
+  background: #fff7e8;
+  color: #8a4a06;
+}
+
+.form-fill-dialog__warning svg,
+.form-fill-dialog__irreversible svg {
+  flex: 0 0 auto;
+  margin-top: 1px;
+}
+
+.form-fill-dialog__fields {
+  display: grid;
+  gap: 11px;
+}
+
+.form-fill-dialog__fields-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.form-fill-dialog__fields-heading strong {
+  color: var(--color-text);
+  font-size: 13px;
+}
+
+.form-fill-dialog__fields-heading span {
+  color: var(--color-text-soft);
+  font-size: 11px;
+}
+
+.form-fill-dialog__field {
+  display: grid;
+  gap: 6px;
+}
+
+.form-fill-dialog__field .inspector__textarea {
+  min-height: 78px;
+}
+
+.form-fill-dialog__field-help,
+.form-fill-dialog__read-only {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-text-soft);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.form-fill-dialog__checkbox,
+.form-fill-dialog__flatten {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 11px;
+  border: 1px solid var(--color-border);
+  border-radius: 9px;
+  background: var(--color-canvas-subtle);
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.form-fill-dialog__checkbox:has(input:disabled),
+.form-fill-dialog__flatten:has(input:disabled) {
+  cursor: default;
+}
+
+.form-fill-dialog__checkbox > input,
+.form-fill-dialog__flatten > input {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  margin: 1px 0 0;
+  accent-color: var(--color-primary);
+}
+
+.form-fill-dialog__checkbox > span,
+.form-fill-dialog__flatten > span {
+  display: grid;
+  gap: 3px;
+}
+
+.form-fill-dialog__checkbox strong,
+.form-fill-dialog__flatten strong {
+  font-size: 12px;
+}
+
+.form-fill-dialog__checkbox small,
+.form-fill-dialog__flatten small {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-text-muted);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.form-fill-dialog__choice-group {
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.form-fill-dialog__choice-group > legend {
+  padding: 0;
+  color: var(--color-text);
+  font-size: 12px;
+  font-weight: 720;
+}
+
+.form-fill-dialog__choice-group > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.form-fill-dialog__choice-group label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 31px;
+  padding: 5px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 7px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.form-fill-dialog__choice-group label:has(input:checked) {
+  border-color: color-mix(in srgb, var(--color-primary) 45%, var(--color-border));
+  background: var(--color-primary-soft);
+  color: var(--color-primary-strong);
+}
+
+.form-fill-dialog__choice-group label:has(input:disabled) {
+  color: var(--color-text-muted);
+  cursor: default;
+}
+
+.form-fill-dialog__choice-group input {
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  accent-color: var(--color-primary);
+}
+
+.form-fill-dialog__unsupported {
+  border-top: 1px solid var(--color-border);
+  padding-top: 11px;
+}
+
+.form-fill-dialog__unsupported summary {
+  color: var(--color-text-muted);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.form-fill-dialog__unsupported ul {
+  display: grid;
+  gap: 6px;
+  margin: 9px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.form-fill-dialog__unsupported li {
+  display: grid;
+  grid-template-columns: minmax(120px, .8fr) minmax(0, 1.7fr);
+  gap: 9px;
+  padding: 7px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 7px;
+  color: var(--color-text-muted);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.form-fill-dialog__unsupported strong {
+  overflow: hidden;
+  color: var(--color-text);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.form-fill-dialog__hint,
+.form-fill-dialog__empty {
+  color: var(--color-text-muted);
+}
+
+.form-fill-dialog__empty {
+  padding: 20px 12px;
+  border: 1px dashed var(--color-border-strong);
+  border-radius: 9px;
+  text-align: center;
+}
+
+.form-fill-dialog__footer .btn--primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-fill-dialog__spinner {
+  animation: form-fill-dialog-spin .8s linear infinite;
+}
+
+@keyframes form-fill-dialog-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 570px) {
+  .form-fill-dialog__unsupported li {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .form-fill-dialog__choice-group > div {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}

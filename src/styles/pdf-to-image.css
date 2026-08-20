@@ -1,0 +1,25 @@
+.pdf-to-image-dialog { width: min(570px, 100%); }
+.pdf-to-image-dialog__body { display: grid; gap: 15px; }
+.pdf-to-image-dialog__privacy { margin: 0; }
+.pdf-to-image-dialog__fieldset { display: grid; gap: 7px; min-width: 0; margin: 0; padding: 0; border: 0; }
+.pdf-to-image-dialog__fieldset > legend { margin-bottom: 7px; color: var(--color-text); font-size: 12px; font-weight: 760; }
+.pdf-to-image-dialog__choice { display: flex; align-items: flex-start; gap: 8px; padding: 9px 10px; border: 1px solid var(--color-border); border-radius: 9px; background: var(--color-surface); cursor: pointer; transition: border-color var(--transition-fast), background var(--transition-fast); }
+.pdf-to-image-dialog__choice:hover { border-color: var(--color-border-strong); background: var(--color-canvas-subtle); }
+.pdf-to-image-dialog__choice:has(input:checked) { border-color: color-mix(in srgb, var(--color-primary) 48%, var(--color-border)); background: var(--color-primary-soft); }
+.pdf-to-image-dialog__choice input { width: 14px; height: 14px; margin: 2px 0 0; accent-color: var(--color-primary); }
+.pdf-to-image-dialog__choice span { display: grid; gap: 2px; min-width: 0; }
+.pdf-to-image-dialog__choice strong { color: var(--color-text); font-size: 12px; }
+.pdf-to-image-dialog__choice small { color: var(--color-text-muted); font-size: 11px; line-height: 1.42; }
+.pdf-to-image-dialog__range { display: grid; gap: 6px; padding: 4px 2px 0; }
+.pdf-to-image-dialog__hint { margin: 0; color: var(--color-text-soft); font-size: 11px; line-height: 1.45; }
+.pdf-to-image-dialog__preview, .pdf-to-image-dialog__warning, .pdf-to-image-dialog__status { display: flex; align-items: flex-start; gap: 7px; margin: 0; padding: 9px 10px; border-radius: 8px; font-size: 12px; line-height: 1.45; }
+.pdf-to-image-dialog__preview { border: 1px solid color-mix(in srgb, var(--color-primary) 22%, var(--color-border)); background: var(--color-primary-soft); color: var(--color-primary-strong); font-weight: 700; }
+.pdf-to-image-dialog__warning { border: 1px solid color-mix(in srgb, var(--color-warning, #c88016) 34%, var(--color-border)); background: color-mix(in srgb, #f9b640 13%, var(--color-surface)); color: var(--color-text); }
+.pdf-to-image-dialog__warning svg { flex: 0 0 auto; color: #ae700d; }
+.pdf-to-image-dialog__status { padding: 0; color: var(--color-text-muted); }
+.pdf-to-image-dialog__status svg { flex: 0 0 auto; animation: spin .85s linear infinite; }
+.pdf-to-image-dialog .btn--primary { display: inline-flex; align-items: center; gap: 6px; }
+
+@media (max-width: 570px) {
+  .pdf-to-image-dialog__choice { padding: 8px; }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "Free PDF",
+  "short_name": "Free PDF",
+  "description": "Editor PDF gratuito y privado que funciona directamente en tu navegador.",
+  "lang": "es",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f7fb",
+  "theme_color": "#2854db",
+  "categories": ["productivity", "utilities"],
+  "icons": [{ "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

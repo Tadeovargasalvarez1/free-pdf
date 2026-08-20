@@ -1,0 +1,6 @@
+# Permite la indexación de la landing pública.
+User-agent: *
+Allow: /
+
+# Sustituye el marcador por la URL canónica de producción antes del despliegue.
+Sitemap: https://Tadeovargasalvarez1.github.io/free-pdf/sitemap.xml
