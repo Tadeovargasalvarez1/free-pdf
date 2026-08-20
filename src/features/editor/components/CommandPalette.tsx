@@ -22,6 +22,7 @@ interface CommandPaletteProps {
   onOpenWatermark: () => void;
   onOpenMetadata: () => void;
   onOpenPdfToImage: () => void;
+  onOpenPdfToDocument: () => void;
   onOpenFormFill: () => void;
   onOpenTextSearch: () => void;
   onOpenPageOrganizer: () => void;
@@ -33,7 +34,7 @@ interface CommandPaletteProps {
   onExport: () => void;
 }
 
-export function CommandPalette({ open, onClose, onChooseTool, onOpenSignature, onOpenStamp, onOpenPageNumbers, onOpenWatermark, onOpenMetadata, onOpenPdfToImage, onOpenFormFill, onOpenTextSearch, onOpenPageOrganizer, onOpenCrop, onOpenExtract, onOpenSplit, onUndo, onRedo, onExport }: CommandPaletteProps) {
+export function CommandPalette({ open, onClose, onChooseTool, onOpenSignature, onOpenStamp, onOpenPageNumbers, onOpenWatermark, onOpenMetadata, onOpenPdfToImage, onOpenPdfToDocument, onOpenFormFill, onOpenTextSearch, onOpenPageOrganizer, onOpenCrop, onOpenExtract, onOpenSplit, onUndo, onRedo, onExport }: CommandPaletteProps) {
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const commands = useMemo<EditorCommand[]>(() => [
@@ -48,6 +49,7 @@ export function CommandPalette({ open, onClose, onChooseTool, onOpenSignature, o
     { id: "watermark", title: "Añadir marca de agua", description: "Añade un texto visual editable a todas las páginas.", aliases: ["marca", "watermark", "borrador"], icon: Stamp, run: onOpenWatermark },
     { id: "metadata", title: "Editar metadatos", description: "Actualiza los campos Info básicos de la copia exportada.", aliases: ["metadatos", "título", "autor", "info"], icon: Info, run: onOpenMetadata },
     { id: "pdf-to-image", title: "PDF a PNG", description: "Exporta la página actual, todas o un rango como imágenes PNG locales.", aliases: ["png", "imagen", "convertir", "exportar páginas"], icon: FileImage, run: onOpenPdfToImage },
+    { id: "pdf-to-document", title: "PDF a documento", description: "Extrae texto del PDF como Word (.docx), TXT, HTML o Markdown.", aliases: ["word", "docx", "documento", "txt", "html", "markdown", "convertir"], icon: FileText, run: onOpenPdfToDocument },
     { id: "form", title: "Rellenar formulario", description: "Rellena campos AcroForm locales y abre una copia nueva.", aliases: ["formulario", "acroform", "campo", "aplanar"], icon: FileText, run: onOpenFormFill },
     { id: "find", title: "Buscar texto", description: "Busca texto en las páginas del PDF abierto sin subirlo.", aliases: ["buscar", "encontrar", "ctrl f", "texto"], icon: Search, shortcut: "Ctrl F", run: onOpenTextSearch },
     { id: "organize-pages", title: "Organizar páginas", description: "Reordena, rota, duplica, elimina o extrae páginas en una cuadrícula.", aliases: ["páginas", "reordenar", "duplicar", "eliminar", "rotar"], icon: LayoutGrid, run: onOpenPageOrganizer },
@@ -57,7 +59,7 @@ export function CommandPalette({ open, onClose, onChooseTool, onOpenSignature, o
     { id: "undo", title: "Deshacer", description: "Revierte la última edición.", aliases: ["undo", "atrás"], icon: Undo2, shortcut: "Ctrl Z", run: onUndo },
     { id: "redo", title: "Rehacer", description: "Restaura una edición deshecha.", aliases: ["redo", "adelante"], icon: Undo2, shortcut: "Ctrl ⇧ Z", run: onRedo },
     { id: "export", title: "Descargar PDF", description: "Exporta una copia nueva del documento.", aliases: ["exportar", "guardar", "descargar"], icon: FilePenLine, shortcut: "Ctrl S", run: onExport }
-  ], [onChooseTool, onExport, onOpenCrop, onOpenExtract, onOpenFormFill, onOpenMetadata, onOpenPageNumbers, onOpenPageOrganizer, onOpenPdfToImage, onOpenSignature, onOpenSplit, onOpenStamp, onOpenTextSearch, onOpenWatermark, onRedo, onUndo]);
+  ], [onChooseTool, onExport, onOpenCrop, onOpenExtract, onOpenFormFill, onOpenMetadata, onOpenPageNumbers, onOpenPageOrganizer, onOpenPdfToDocument, onOpenPdfToImage, onOpenSignature, onOpenSplit, onOpenStamp, onOpenTextSearch, onOpenWatermark, onRedo, onUndo]);
 
   useEffect(() => {
     if (!open) return;

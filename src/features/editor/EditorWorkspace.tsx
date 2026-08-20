@@ -28,6 +28,7 @@ const CropDialog = lazy(async () => ({ default: (await import("@/features/editor
 const DocumentOverlayDialog = lazy(async () => ({ default: (await import("@/features/editor/components/DocumentOverlayDialog")).DocumentOverlayDialog }));
 const MetadataDialog = lazy(async () => ({ default: (await import("@/features/editor/components/MetadataDialog")).MetadataDialog }));
 const PdfToImageDialog = lazy(async () => ({ default: (await import("@/features/convert/PdfToImageDialog")).PdfToImageDialog }));
+const PdfToDocumentDialog = lazy(async () => ({ default: (await import("@/features/convert/PdfToDocumentDialog")).PdfToDocumentDialog }));
 const FormFillDialog = lazy(async () => ({ default: (await import("@/features/forms/FormFillDialog")).FormFillDialog }));
 const TextSearchDialog = lazy(async () => ({ default: (await import("@/features/editor/components/TextSearchDialog")).TextSearchDialog }));
 const PageOrganizerDialog = lazy(async () => ({ default: (await import("@/features/editor/components/PageOrganizerDialog")).PageOrganizerDialog }));
@@ -55,6 +56,7 @@ export function EditorWorkspace({ file, initialTool, theme, onThemeChange, onClo
   const [documentOverlayMode, setDocumentOverlayMode] = useState<DocumentOverlayMode | null>(null);
   const [showMetadata, setShowMetadata] = useState(false);
   const [showPdfToImage, setShowPdfToImage] = useState(false);
+  const [showPdfToDocument, setShowPdfToDocument] = useState(false);
   const [showFormFill, setShowFormFill] = useState(false);
   const [showTextSearch, setShowTextSearch] = useState(false);
   const [showCommands, setShowCommands] = useState(false);
@@ -101,6 +103,7 @@ export function EditorWorkspace({ file, initialTool, theme, onThemeChange, onClo
     setDocumentOverlayMode(null);
     setShowMetadata(false);
     setShowPdfToImage(false);
+    setShowPdfToDocument(false);
     setShowFormFill(false);
     setShowTextSearch(false);
     setShowCommands(false);
@@ -123,6 +126,9 @@ export function EditorWorkspace({ file, initialTool, theme, onThemeChange, onClo
         }
         if (initialTool === "extract" || initialTool === "split") {
           setPageRangeMode(initialTool);
+        }
+        if (initialTool === "document") {
+          setShowPdfToDocument(true);
         }
         if (initialTool === "signature") {
           openedSignatureRef.current = true;
@@ -389,6 +395,7 @@ export function EditorWorkspace({ file, initialTool, theme, onThemeChange, onClo
         onOpenWatermark={() => setDocumentOverlayMode("watermark")}
         onOpenMetadata={() => setShowMetadata(true)}
         onOpenPdfToImage={() => setShowPdfToImage(true)}
+        onOpenPdfToDocument={() => setShowPdfToDocument(true)}
         onOpenFormFill={handleOpenFormFill}
         onOpenTextSearch={() => setShowTextSearch(true)}
         onOpenPageOrganizer={() => setShowPageOrganizer(true)}
@@ -448,6 +455,17 @@ export function EditorWorkspace({ file, initialTool, theme, onThemeChange, onClo
         onClose={() => setShowPdfToImage(false)}
         onComplete={(message) => {
           setShowPdfToImage(false);
+          setNotice(message);
+        }}
+      /></Suspense>}
+      {showPdfToDocument && <Suspense fallback={null}><PdfToDocumentDialog
+        document={document}
+        pages={project.pages}
+        activePageId={activePageId}
+        sourceName={project.source.name}
+        onClose={() => setShowPdfToDocument(false)}
+        onComplete={(message) => {
+          setShowPdfToDocument(false);
           setNotice(message);
         }}
       /></Suspense>}
@@ -517,6 +535,7 @@ export function EditorWorkspace({ file, initialTool, theme, onThemeChange, onClo
         onOpenWatermark={() => setDocumentOverlayMode("watermark")}
         onOpenMetadata={() => setShowMetadata(true)}
         onOpenPdfToImage={() => setShowPdfToImage(true)}
+        onOpenPdfToDocument={() => setShowPdfToDocument(true)}
         onOpenFormFill={handleOpenFormFill}
         onOpenTextSearch={() => setShowTextSearch(true)}
         onOpenPageOrganizer={() => setShowPageOrganizer(true)}
@@ -539,7 +558,7 @@ function LoadingState({ fileName, error, onBack }: { fileName: string; error: st
 }
 
 function toEditorTool(intent: EditorLaunchIntent): EditorTool {
-  if (intent === "pages" || intent === "signature" || intent === "image" || intent === "extract" || intent === "split") {
+  if (intent === "pages" || intent === "signature" || intent === "image" || intent === "extract" || intent === "split" || intent === "document") {
     return "select";
   }
   return intent;

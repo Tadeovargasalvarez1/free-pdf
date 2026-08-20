@@ -22,7 +22,7 @@ import { MergeDialog } from "@/features/merge/MergeDialog";
 const ConversionDialog = lazy(async () => ({ default: (await import("@/features/convert/ConversionDialog")).ConversionDialog }));
 const FormFillDialog = lazy(async () => ({ default: (await import("@/features/forms/FormFillDialog")).FormFillDialog }));
 
-export type EditorLaunchIntent = "select" | "text" | "image" | "shape" | "draw" | "signature" | "pages" | "extract" | "split";
+export type EditorLaunchIntent = "select" | "text" | "image" | "shape" | "draw" | "signature" | "pages" | "extract" | "split" | "document";
 
 interface HomeScreenProps {
   theme: ThemePreference;
@@ -95,6 +95,13 @@ const AVAILABLE_TOOLS: ToolCard[] = [
     description: "Crea un PDF local desde PNG o JPEG.",
     action: "convert-images",
     accent: "coral"
+  },
+  {
+    icon: FileText,
+    title: "PDF a Word",
+    description: "Extrae texto a .docx, .txt, HTML o Markdown.",
+    intent: "document",
+    accent: "violet"
   },
   {
     icon: FileText,
