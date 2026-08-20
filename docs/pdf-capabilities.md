@@ -17,9 +17,10 @@ operación en una promesa de producto.
   páginas, unir PDFs, extraer rangos, dividir por cantidad de páginas y
   recortar mediante `CropBox`.
 - **Conversión local disponible:** PDF a PNG (página actual, todas o un rango);
-  PDF con texto seleccionable a Word `.docx`, `.txt`, `.html` o Markdown `.md`;
-  PNG/JPEG a PDF y texto escrito o `.txt` UTF-8 a PDF. No se anuncian como
-  OCR, conversión de Office fiel ni conversión genérica de formatos.
+  PDF con texto seleccionable a Word `.docx`, Excel `.xlsx`, CSV `.csv`,
+  `.txt`, `.html` o Markdown `.md`; PNG/JPEG a PDF y texto escrito o `.txt`
+  UTF-8 a PDF. No se anuncian como OCR, conversión de Office fiel ni
+  conversión genérica de formatos.
 - **Formularios y metadatos disponibles con límites:** rellenado y aplanado
   de AcroForm estándar compatible, y edición de los campos básicos de PDF
   Info. Ambos flujos crean una copia nueva y comunican sus restricciones.
@@ -84,7 +85,7 @@ WASM, CMaps, fuentes estándar y datos de idioma se cargan bajo demanda.
 | Números de página y marca de agua delante | Objetos visuales propios + `pdf-lib` | **Disponible en la interfaz** | Se añaden a las páginas actuales como objetos visuales editables y se hacen permanentes al exportar una copia. La marca actual se dibuja encima del contenido; no es una protección, una redacción ni una reconstrucción detrás del contenido. |
 | Marca de agua detrás del contenido | Reconstrucción de página con `pdf-lib` | **Parcial / diferido** | Dibujar en el orden normal la deja encima. Para ponerla detrás hay que reconstruir la página, lo que puede afectar interactividad; ofrecerlo sólo tras pruebas, claramente como modo de compatibilidad. |
 | PDF a PNG | PDF.js + Canvas | **Disponible en la interfaz** | Exporta la página actual, todas las páginas o un rango como PNG local a escala 1× o 2×. La calidad y memoria dependen de escala, DPR, dimensiones de Canvas y del documento; no ofrece JPEG ni WebP. |
-| PDF a Word/texto/HTML/Markdown | PDF.js `getTextContent` + empaquetado OOXML propio | **Disponible en la interfaz con límites** | Extrae texto seleccionable por página y genera `.docx`, `.txt`, `.html` o `.md` localmente. No es OCR, no reconstruye maquetación Word fiel, tablas complejas, columnas, imágenes ni contenido que sólo exista como imagen. |
+| PDF a Word/Excel/CSV/texto/HTML/Markdown | PDF.js `getTextContent` + coordenadas + empaquetado OOXML propio | **Disponible en la interfaz con límites** | Extrae texto seleccionable por página y genera `.docx`, `.xlsx`, `.csv`, `.txt`, `.html` o `.md` localmente. Para Excel/CSV infiere filas y columnas desde posiciones de texto; no es OCR, no reconstruye maquetación Office fiel, tablas partidas, columnas complejas, fórmulas, celdas combinadas, imágenes ni contenido que sólo exista como imagen. |
 | Imagen a PDF y texto a PDF | Canvas + `pdf-lib` | **Disponible en la interfaz** | Crea un PDF local nuevo con PNG/JPEG o con texto escrito/archivo `.txt` UTF-8. No modifica el original y no es OCR, Word ni una conversión genérica de formatos. |
 | OCR de imágenes | Tesseract.js en worker, cuando se instale | **Parcial / diferido** | Tesseract.js trabaja sobre imágenes, no abre PDFs directamente. PDF.js debe renderizar cada página; los idiomas, worker y WASM se autoalojan y se cargan sólo al pedir OCR. La escritura manual no se promete. |
 | PDF escaneado a PDF buscable | PDF.js + Tesseract.js | **Parcial / diferido** | Tesseract puede producir salida PDF de una imagen. Al procesar un PDF así se obtiene una copia rasterizada con capa OCR, que puede perder vectores, enlaces, formularios y aumentar el tamaño. No se llamará «OCR sin pérdida sobre el PDF original». |
@@ -92,7 +93,7 @@ WASM, CMaps, fuentes estándar y datos de idioma se cargan bajo demanda.
 | Proteger con contraseña, permisos o cifrado | Ninguno instalado | **No disponible** | `pdf-lib` no soporta documentos cifrados ni crea cifrado. No mostrar controles de seguridad que no produzcan un PDF cifrado verificable. |
 | Desbloquear con contraseña conocida | Ninguno instalado | **No disponible para exportación** | PDF.js puede visualizar tras autenticarse, pero no se debe exportar una supuesta copia descifrada con el stack actual. Nunca se intenta romper contraseñas. |
 | Redacción segura | MuPDF opcional | **No disponible en el stack actual** | Un rectángulo negro o un texto cubierto son sólo redacción visual. MuPDF expone anotaciones de redacción y `applyRedactions`, pero su incorporación queda bloqueada por licencia y por una prueba de seguridad específica. |
-| PDF/A, Word fiel, eliminación forense de datos y edición semántica de contenido | Ninguno instalado | **No disponible** | La exportación `.docx` actual es textual y editable, no una conversión Word fiel. Las variantes de alta fidelidad requieren motores, validación y pruebas de interoperabilidad adicionales. |
+| PDF/A, Word/Excel fiel, eliminación forense de datos y edición semántica de contenido | Ninguno instalado | **No disponible** | Las exportaciones `.docx` y `.xlsx` actuales son textuales/editables y heurísticas, no conversiones Office fieles. Las variantes de alta fidelidad requieren motores, validación y pruebas de interoperabilidad adicionales. |
 
 ## Decisiones por fase
 

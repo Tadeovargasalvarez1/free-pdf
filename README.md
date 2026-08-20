@@ -18,7 +18,7 @@ El flujo principal procesa los documentos en el dispositivo del usuario. La apli
 - Unir varios PDFs locales y abrir el resultado en el mismo editor.
 - Extraer rangos como `1, 3, 5-9` y dividir un documento en PDFs nuevos por cantidad de páginas.
 - Recortar una página mediante su `CropBox`, añadir números de página y aplicar una marca de agua visual sobre las páginas actuales.
-- Crear un PDF nuevo desde imágenes PNG/JPEG o desde texto escrito y archivos `.txt` UTF-8; exportar páginas del PDF abierto como PNG; extraer texto del PDF abierto a Word `.docx`, `.txt`, `.html` o Markdown `.md`.
+- Crear un PDF nuevo desde imágenes PNG/JPEG o desde texto escrito y archivos `.txt` UTF-8; exportar páginas del PDF abierto como PNG; extraer texto del PDF abierto a Word `.docx`, Excel `.xlsx`, CSV `.csv`, `.txt`, `.html` o Markdown `.md`.
 - Rellenar formularios AcroForm estándar compatibles y, opcionalmente, aplanarlos en una copia nueva.
 - Consultar y editar los campos básicos del diccionario PDF Info: título, autor, asunto, palabras clave, creador y productor.
 - Deshacer y rehacer operaciones; exportar una copia nueva del PDF.
@@ -28,7 +28,7 @@ Los números, sellos y marcas de agua se exportan como contenido visual permanen
 
 El recorte cambia la `CropBox` de la copia exportada y oculta el exterior al abrirla, pero no elimina de forma segura el contenido que queda fuera del área. Tampoco se debe usar como redacción.
 
-Los conversores producen documentos o imágenes nuevos de forma local. Imagen a PDF admite PNG/JPEG y texto a PDF admite texto escrito o `.txt` UTF-8. PDF a imagen exporta PNG, no JPEG ni WebP. PDF a documento extrae texto seleccionable a `.docx`, `.txt`, `.html` o `.md`; no ofrece OCR, no reconstruye una maquetación Word perfecta y no recupera texto que sólo exista como imagen.
+Los conversores producen documentos o imágenes nuevos de forma local. Imagen a PDF admite PNG/JPEG y texto a PDF admite texto escrito o `.txt` UTF-8. PDF a imagen exporta PNG, no JPEG ni WebP. PDF a documento extrae texto seleccionable a `.docx`, `.xlsx`, `.csv`, `.txt`, `.html` o `.md`; para Excel/CSV reconstruye filas y columnas por coordenadas. No ofrece OCR, no reconstruye una maquetación Word/Excel perfecta, no conserva fórmulas ni celdas combinadas y no recupera texto que sólo exista como imagen.
 
 El rellenado cubre campos AcroForm habituales (texto, casilla, radio, lista y desplegable) en PDFs sin cifrar. No modifica XFA, acciones de botones, campos de firma digital, texto enriquecido o selectores de archivos. Aplanar es irreversible en la copia resultante y se rechaza si el PDF contiene un campo de firma digital para no afectar su posible validez. La edición de metadatos solo modifica los campos Info indicados: no garantiza limpiar XMP, IDs del documento, adjuntos ni historial de revisiones.
 

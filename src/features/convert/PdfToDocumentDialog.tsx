@@ -25,6 +25,8 @@ interface ProgressState {
 
 const FORMAT_OPTIONS: Array<{ value: PdfDocumentFormat; label: string; description: string }> = [
   { value: "docx", label: "Word (.docx)", description: "Documento editable con el texto extraído por páginas." },
+  { value: "xlsx", label: "Excel (.xlsx)", description: "Hoja de cálculo con filas y columnas reconstruidas por posición." },
+  { value: "csv", label: "CSV para Excel (.csv)", description: "Tabla simple compatible con Excel, Sheets y LibreOffice." },
   { value: "txt", label: "Texto plano (.txt)", description: "Sólo texto UTF-8, útil para copiar o archivar." },
   { value: "html", label: "HTML (.html)", description: "Documento web simple con secciones por página." },
   { value: "md", label: "Markdown (.md)", description: "Texto estructurado con títulos de página." }
@@ -98,7 +100,7 @@ export function PdfToDocumentDialog({ document: pdfDocument, pages, activePageId
         onProgress: (complete, total) => setProgress({ complete, total })
       });
       downloadBlob(result.bytes, result.name, result.mimeType);
-      onComplete?.(`Se descargó ${result.name}. La conversión extrae texto editable; no incluye OCR ni copia exacta del diseño.`);
+      onComplete?.(`Se descargó ${result.name}. ${isSpreadsheetFormat(format) ? "Intentamos reconstruir filas y columnas desde las coordenadas del PDF; no incluye OCR ni celdas combinadas perfectas." : "La conversión extrae texto editable; no incluye OCR ni copia exacta del diseño."}`);
     } catch (conversionError) {
       setError(conversionError instanceof Error ? conversionError.message : "No pudimos convertir este PDF a documento.");
     } finally {
@@ -125,7 +127,7 @@ export function PdfToDocumentDialog({ document: pdfDocument, pages, activePageId
         <header className="modal__header">
           <div>
             <h2 id={titleId}>PDF a documento</h2>
-            <p id={descriptionId} className="modal__subheading">Convierte el texto seleccionable del PDF abierto a Word, texto, HTML o Markdown.</p>
+            <p id={descriptionId} className="modal__subheading">Convierte el texto seleccionable del PDF abierto a Word, Excel, CSV, texto, HTML o Markdown.</p>
           </div>
           <button className="icon-button" type="button" aria-label="Cerrar diálogo" disabled={isWorking} onClick={onClose}>
             <X size={17} aria-hidden="true" />
@@ -185,7 +187,7 @@ export function PdfToDocumentDialog({ document: pdfDocument, pages, activePageId
             </label>
 
             {selectedPages.isValid && <p className="pdf-to-document-dialog__preview" aria-live="polite"><FileText size={16} aria-hidden="true" />Se preparará {selectedPages.pages.length} {pageLabel(selectedPages.pages.length)} como {formatLabel(format)}.</p>}
-            <p className="pdf-to-document-dialog__warning"><AlertTriangle size={16} aria-hidden="true" /><span>No es OCR ni reconstrucción perfecta de diseño. Los PDFs escaneados o con texto como imagen necesitan OCR externo.</span></p>
+            <p className="pdf-to-document-dialog__warning"><AlertTriangle size={16} aria-hidden="true" /><span>No es OCR ni reconstrucción perfecta de diseño. En Excel/CSV se infieren filas y columnas por posición; los PDFs escaneados o con tablas como imagen necesitan OCR externo.</span></p>
             {error && <p className="inline-error" role="alert">{error}</p>}
             {isWorking && <p className="pdf-to-document-dialog__status" role="status"><LoaderCircle size={15} aria-hidden="true" />Extrayendo texto {progress ? `${Math.min(progress.complete + 1, progress.total)} de ${progress.total}` : ""}…</p>}
           </div>
@@ -235,9 +237,15 @@ function pageLabel(count: number): string {
 
 function formatLabel(format: PdfDocumentFormat): string {
   if (format === "docx") return "Word (.docx)";
+  if (format === "xlsx") return "Excel (.xlsx)";
+  if (format === "csv") return "CSV para Excel (.csv)";
   if (format === "txt") return "texto plano (.txt)";
   if (format === "html") return "HTML (.html)";
   return "Markdown (.md)";
+}
+
+function isSpreadsheetFormat(format: PdfDocumentFormat): boolean {
+  return format === "xlsx" || format === "csv";
 }
 
 function getFocusableElements(container: HTMLElement | null): HTMLElement[] {

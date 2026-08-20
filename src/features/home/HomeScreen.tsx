@@ -98,8 +98,8 @@ const AVAILABLE_TOOLS: ToolCard[] = [
   },
   {
     icon: FileText,
-    title: "PDF a Word",
-    description: "Extrae texto a .docx, .txt, HTML o Markdown.",
+    title: "PDF a Word/Excel",
+    description: "Extrae texto a .docx, .xlsx, CSV y más.",
     intent: "document",
     accent: "violet"
   },

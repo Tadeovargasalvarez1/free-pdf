@@ -212,7 +212,7 @@ export function EditorTopBar({
               <button type="button" role="menuitem" onClick={() => { closeDocumentMenu(); onOpenWatermark(); }}><Stamp size={15} /> Marca de agua</button>
               <button type="button" role="menuitem" onClick={() => { closeDocumentMenu(); onOpenMetadata(); }}><Info size={15} /> Metadatos</button>
               <button type="button" role="menuitem" onClick={() => { closeDocumentMenu(); onOpenPdfToImage(); }}><FileImage size={15} /> PDF a PNG</button>
-              <button type="button" role="menuitem" onClick={() => { closeDocumentMenu(); onOpenPdfToDocument(); }}><FileText size={15} /> PDF a documento</button>
+              <button type="button" role="menuitem" onClick={() => { closeDocumentMenu(); onOpenPdfToDocument(); }}><FileText size={15} /> PDF a Word/Excel</button>
               <button type="button" role="menuitem" onClick={() => { closeDocumentMenu(); onOpenFormFill(); }}><FileText size={15} /> Rellenar formulario</button>
             </div>
           )}
