@@ -53,7 +53,7 @@ Para el diseño completo, consulta [docs/architecture.md](docs/architecture.md).
 
 ## Requisitos
 
-- Node.js 20 o superior (se recomienda la versión LTS vigente).
+- Node.js 22 o superior; CI usa Node.js 24 por compatibilidad con `pdfjs-dist` 6.
 - npm incluido con Node.js.
 - Un navegador moderno basado en Chromium, Firefox o Safari reciente.
 
