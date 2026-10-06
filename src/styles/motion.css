@@ -1,0 +1,330 @@
+/*
+ * Free PDF — motion layer
+ * Fluid entrances, hover lift, sliding panels and dialog transitions.
+ * Applied after the layout styles so it can refine them without duplication.
+ */
+
+/* ---- Keyframes --------------------------------------------------------- */
+@keyframes fp-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fp-fade-up {
+  from { opacity: 0; transform: translate3d(0, 22px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes fp-fade-down {
+  from { opacity: 0; transform: translate3d(0, -14px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes fp-scale-in {
+  from { opacity: 0; transform: translate3d(0, 14px, 0) scale(0.965); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@keyframes fp-slide-in-right {
+  from { opacity: 0; transform: translate3d(34px, 0, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes fp-slide-in-left {
+  from { opacity: 0; transform: translate3d(-34px, 0, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes fp-float {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -12px, 0); }
+}
+
+@keyframes fp-bob {
+  0%, 100% { translate: 0 -50%; }
+  50% { translate: 0 calc(-50% - 12px); }
+}
+
+@keyframes fp-aurora {
+  0% { transform: translate3d(-3%, -2%, 0) scale(1.05); }
+  50% { transform: translate3d(3%, 2%, 0) scale(1.12); }
+  100% { transform: translate3d(-3%, -2%, 0) scale(1.05); }
+}
+
+@keyframes fp-sheen {
+  from { transform: translateX(-120%); }
+  to { transform: translateX(220%); }
+}
+
+@keyframes fp-backdrop-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fp-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---- Global feel ------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  transition: background-color var(--transition-base), color var(--transition-base);
+}
+
+:root[data-theme] * {
+  scrollbar-color: color-mix(in srgb, var(--color-text-soft) 55%, transparent) transparent;
+}
+
+/* ---- Landing entrances ------------------------------------------------- */
+.home-nav {
+  animation: fp-fade-down var(--transition-slow) both;
+}
+
+.home-hero > .eyebrow {
+  animation: fp-fade-up 640ms var(--ease-editorial) both;
+  animation-delay: 40ms;
+}
+
+.home-hero > h1 {
+  animation: fp-fade-up 720ms var(--ease-editorial) both;
+  animation-delay: 120ms;
+}
+
+.home-hero > .home-hero__intro {
+  animation: fp-fade-up 720ms var(--ease-editorial) both;
+  animation-delay: 200ms;
+}
+
+.home-hero > .dropzone {
+  animation: fp-fade-up 760ms var(--ease-editorial) both;
+  animation-delay: 280ms;
+}
+
+.home-hero > .local-note,
+.home-hero > .inline-error {
+  animation: fp-fade-up 760ms var(--ease-editorial) both;
+  animation-delay: 360ms;
+}
+
+.tools-section {
+  animation: fp-fade-up 780ms var(--ease-editorial) both;
+  animation-delay: 180ms;
+}
+
+.home-footer {
+  animation: fp-fade-in 900ms var(--ease-editorial) both;
+  animation-delay: 320ms;
+}
+
+/* Staggered tool grid. */
+.tool-card {
+  animation: fp-fade-up 640ms var(--ease-editorial) both;
+}
+.tool-card:nth-child(1) { animation-delay: 240ms; }
+.tool-card:nth-child(2) { animation-delay: 290ms; }
+.tool-card:nth-child(3) { animation-delay: 340ms; }
+.tool-card:nth-child(4) { animation-delay: 390ms; }
+.tool-card:nth-child(5) { animation-delay: 440ms; }
+.tool-card:nth-child(6) { animation-delay: 490ms; }
+.tool-card:nth-child(7) { animation-delay: 540ms; }
+.tool-card:nth-child(8) { animation-delay: 590ms; }
+.tool-card:nth-child(9) { animation-delay: 640ms; }
+.tool-card:nth-child(10) { animation-delay: 690ms; }
+.tool-card:nth-child(11) { animation-delay: 740ms; }
+.tool-card:nth-child(12) { animation-delay: 790ms; }
+
+/* Decorative floating product cards. */
+.float-card {
+  animation: fp-bob 7s var(--ease-standard) infinite;
+}
+.float-card--delay {
+  animation-delay: 1.6s;
+  animation-duration: 8.5s;
+}
+
+/* ---- Editor entrances -------------------------------------------------- */
+.editor-shell {
+  animation: fp-fade-in 300ms var(--ease-standard) both;
+}
+
+.editor-topbar {
+  animation: fp-fade-down 480ms var(--ease-editorial) both;
+}
+
+.page-sidebar {
+  animation: fp-slide-in-left 520ms var(--ease-editorial) both;
+}
+
+.inspector {
+  animation: fp-slide-in-right 520ms var(--ease-editorial) both;
+}
+
+.document-viewport__inner {
+  animation: fp-fade-in 640ms var(--ease-editorial) both;
+  animation-delay: 90ms;
+}
+
+.editor-statusbar {
+  animation: fp-fade-in 640ms var(--ease-editorial) both;
+  animation-delay: 140ms;
+}
+
+/* ---- Dialogs / windows ------------------------------------------------- */
+.modal-backdrop {
+  animation: fp-backdrop-in 200ms var(--ease-standard) both;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.modal {
+  animation: fp-scale-in 340ms var(--ease-editorial) both;
+}
+
+.command-palette {
+  animation: fp-scale-in 300ms var(--ease-editorial) both;
+}
+
+.command-list .command-item {
+  animation: fp-fade-up 460ms var(--ease-editorial) both;
+}
+.command-list .command-item:nth-child(1) { animation-delay: 60ms; }
+.command-list .command-item:nth-child(2) { animation-delay: 100ms; }
+.command-list .command-item:nth-child(3) { animation-delay: 140ms; }
+.command-list .command-item:nth-child(4) { animation-delay: 180ms; }
+.command-list .command-item:nth-child(5) { animation-delay: 220ms; }
+.command-list .command-item:nth-child(6) { animation-delay: 260ms; }
+
+.editor-topbar__more-menu {
+  animation: fp-fade-down 220ms var(--ease-editorial) both;
+  transform-origin: top right;
+}
+
+.editor-notice {
+  animation: fp-slide-in-right 380ms var(--ease-editorial) both;
+}
+
+.loading-card,
+.editor-error__card {
+  animation: fp-scale-in 520ms var(--ease-editorial) both;
+}
+
+/* Staggered list items inside dialogs (file lists, results, fields). */
+.merge-file,
+.conversion-dialog__file,
+.text-search-dialog__result,
+.form-fill-dialog__field {
+  animation: fp-fade-up 420ms var(--ease-editorial) both;
+}
+.merge-file:nth-child(2),
+.conversion-dialog__file:nth-child(2),
+.text-search-dialog__result:nth-child(2) { animation-delay: 50ms; }
+.merge-file:nth-child(3),
+.conversion-dialog__file:nth-child(3),
+.text-search-dialog__result:nth-child(3) { animation-delay: 100ms; }
+.merge-file:nth-child(4),
+.conversion-dialog__file:nth-child(4),
+.text-search-dialog__result:nth-child(4) { animation-delay: 150ms; }
+.merge-file:nth-child(5),
+.conversion-dialog__file:nth-child(5),
+.text-search-dialog__result:nth-child(5) { animation-delay: 200ms; }
+
+/* ---- Fluid interactions ------------------------------------------------ */
+.icon-button,
+.toolbar-tool,
+.theme-toggle,
+.btn,
+.tool-card,
+.thumbnail-item,
+.page-organizer__card,
+.merge-file,
+.text-search-dialog__result,
+.command-item,
+.signature-tab,
+.field-input,
+.field-select {
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    box-shadow var(--transition-base),
+    transform var(--transition-base);
+}
+
+.tool-card:hover,
+.page-organizer__card:hover {
+  transform: translate3d(0, -4px, 0);
+}
+
+.thumbnail-item {
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-base);
+}
+
+.thumbnail-item:hover {
+  transform: translate3d(3px, 0, 0);
+}
+
+.icon-button:active,
+.toolbar-tool:active,
+.tool-card:active,
+.btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+/* Sliding highlight for the signature tab strip. */
+.signature-tab {
+  position: relative;
+  transition: color var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+/* Primary button sheen sweep. */
+.btn--primary {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn--primary::after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 42%;
+  background: linear-gradient(100deg, transparent, rgb(255 255 255 / 0.28), transparent);
+  content: "";
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+
+.btn--primary:hover:not(:disabled)::after {
+  animation: fp-sheen 720ms var(--ease-standard);
+}
+
+/* Modal close affordance + focus glide. */
+.modal__header {
+  animation: fp-fade-in 420ms var(--ease-editorial) both;
+  animation-delay: 80ms;
+}
+
+.modal__body {
+  animation: fp-fade-up 480ms var(--ease-editorial) both;
+  animation-delay: 120ms;
+}
+
+.modal__footer {
+  animation: fp-fade-in 480ms var(--ease-editorial) both;
+  animation-delay: 180ms;
+}
+
+/* ---- Reduced motion ---------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

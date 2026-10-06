@@ -216,6 +216,24 @@ export function HomeScreen({ theme, onThemeChange, onOpen }: HomeScreenProps) {
       </header>
 
       <section className="home-hero" aria-labelledby="home-heading">
+        <div className="home-hero__floats" aria-hidden="true">
+          <div className="float-card float-card--left">
+            <div className="float-card__row">
+              <span className="float-card__dot"><PenLine size={16} /></span>
+              <strong>Firma lista</strong>
+            </div>
+            <div className="float-card__lines"><span /><span /></div>
+            <span className="float-card__tag">Sin subir archivos</span>
+          </div>
+          <div className="float-card float-card--right float-card--delay">
+            <div className="float-card__row">
+              <span className="float-card__dot"><Layers3 size={16} /></span>
+              <strong>12 páginas</strong>
+            </div>
+            <div className="float-card__lines"><span /><span /></div>
+            <span className="float-card__tag">Organizar</span>
+          </div>
+        </div>
         <div className="eyebrow"><Sparkles aria-hidden="true" size={15} /> PDF sin límites innecesarios</div>
         <h1 id="home-heading">Edita tu PDF.<br /><span>En privado.</span></h1>
         <p className="home-hero__intro">Organiza, anota y firma documentos directamente en tu navegador. Sin cuentas, anuncios ni subidas de archivos.</p>

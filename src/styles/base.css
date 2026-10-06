@@ -19,7 +19,8 @@ body {
   background: var(--color-canvas);
   font-family: var(--font-sans);
   font-size: 15px;
-  line-height: 1.45;
+  font-weight: 460;
+  line-height: 1.5;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
@@ -84,7 +85,7 @@ a {
 .icon-button:hover,
 .icon-button.is-active {
   color: var(--color-primary);
-  border-color: color-mix(in srgb, var(--color-primary) 15%, var(--color-border));
+  border-color: color-mix(in srgb, var(--color-accent) 18%, var(--color-border));
   background: var(--color-primary-soft);
 }
 
@@ -97,14 +98,21 @@ a {
   gap: 2px;
   padding: 3px;
   border: 1px solid var(--color-border);
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   background: var(--color-surface);
   box-shadow: var(--shadow-xs);
 }
 
 .theme-toggle .icon-button {
+  border-radius: 9px;
   width: 27px;
   height: 27px;
+}
+
+.theme-toggle .icon-button.is-active {
+  color: var(--color-primary-contrast);
+  background: var(--color-primary);
+  border-color: transparent;
 }
 
 .theme-toggle--compact {
@@ -127,25 +135,25 @@ a {
   background: var(--color-canvas);
   color: var(--color-text-muted);
   font-size: 14px;
-  font-weight: 650;
+  font-weight: 540;
+  animation: fp-fade-in 400ms var(--ease-editorial) both;
 }
 
 .btn {
   display: inline-flex;
-  min-height: 36px;
+  min-height: 40px;
   align-items: center;
   justify-content: center;
-  gap: 7px;
-  padding: 0 12px;
+  gap: 8px;
+  padding: 0 16px;
   border: 1px solid var(--color-border);
-  border-radius: 9px;
+  border-radius: var(--radius-buttons);
   background: var(--color-surface);
   color: var(--color-text);
   font-size: 13px;
-  font-weight: 650;
+  font-weight: 540;
   line-height: 1;
-  box-shadow: var(--shadow-xs);
-  transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+  transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-base);
 }
 
 .btn:hover:not(:disabled) {
@@ -154,14 +162,14 @@ a {
 }
 
 .btn:active:not(:disabled) {
-  transform: translateY(1px);
+  transform: translateY(1px) scale(0.99);
 }
 
 .btn--primary {
   border-color: var(--color-primary);
   background: var(--color-primary);
   color: var(--color-primary-contrast);
-  box-shadow: 0 7px 16px color-mix(in srgb, var(--color-primary) 26%, transparent);
+  box-shadow: none;
 }
 
 .btn--primary:hover:not(:disabled) {
@@ -181,29 +189,30 @@ a {
   margin: 0 0 6px;
   color: var(--color-text-muted);
   font-size: 11px;
-  font-weight: 750;
-  letter-spacing: 0.045em;
+  font-weight: 620;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
 .field-input,
 .field-select {
   width: 100%;
-  min-height: 34px;
+  min-height: 38px;
   border: 1px solid var(--color-border);
-  border-radius: 8px;
+  border-radius: var(--radius-xs);
+  outline: none;
   background: var(--color-surface);
   color: var(--color-text);
-  padding: 0 9px;
+  padding: 0 11px;
   font-size: 13px;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
 }
 
 .field-input:focus,
 .field-select:focus {
   border-color: var(--color-primary);
   outline: none;
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 18%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 16%, transparent);
 }
 
 .field-input[type="color"] {
