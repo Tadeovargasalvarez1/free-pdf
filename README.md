@@ -1,5 +1,9 @@
 # Free PDF
 
+### 👉 [Abrir la aplicación](https://tadeovargasalvarez1.github.io/free-pdf/)
+
+> **Entra directamente a la página:** [https://tadeovargasalvarez1.github.io/free-pdf/](https://tadeovargasalvarez1.github.io/free-pdf/)
+
 Editor de PDF gratuito, privado y ejecutado localmente en el navegador. Free PDF está pensado para abrir documentos, organizarlos y añadir contenido sin cuentas, anuncios ni un servidor que reciba los archivos.
 
 > Estado: MVP en desarrollo activo. Las capacidades visibles de la aplicación deben corresponder siempre a operaciones que puedan ejecutarse de forma fiable en el navegador.
